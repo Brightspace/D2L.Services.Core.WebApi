@@ -1,0 +1,8 @@
+bin
+obj
+*.swp
+*.suo
+packages
+*.user
+NuGet.exe
+*.nupkg
