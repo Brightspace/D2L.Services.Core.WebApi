@@ -32,14 +32,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="D2L.Activation.WebApi">
-      <HintPath>..\packages\D2L.Activation.WebApi.2.0.0.0\lib\net45\D2L.Activation.WebApi.dll</HintPath>
-    </Reference>
     <Reference Include="D2L.Security.OAuth2">
       <HintPath>..\packages\D2L.Security.OAuth2.4.1.3.0\lib\net451\D2L.Security.OAuth2.dll</HintPath>
     </Reference>
     <Reference Include="D2L.Security.OAuth2.WebApi">
       <HintPath>..\packages\D2L.Security.OAuth2.WebApi.3.0.1.0\lib\net451\D2L.Security.OAuth2.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="D2L.Services.Core.Activation">
+      <HintPath>..\packages\D2L.Services.Core.Activation.3.0.0.0\lib\net45\D2L.Services.Core.Activation.dll</HintPath>
     </Reference>
     <Reference Include="D2L.Services.Core.Configuration">
       <HintPath>..\packages\D2L.Services.Core.Configuration.1.0.0.0\lib\net452\D2L.Services.Core.Configuration.dll</HintPath>

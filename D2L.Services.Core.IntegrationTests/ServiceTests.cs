@@ -1,4 +1,4 @@
-﻿using D2L.Activation.WebApi;
+﻿using D2L.Services.Core.Activation;
 using D2L.Services.Core.Configuration;
 using Moq;
 using NUnit.Framework;

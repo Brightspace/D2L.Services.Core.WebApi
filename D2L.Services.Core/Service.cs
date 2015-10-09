@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Dependencies;
-using D2L.Activation.WebApi;
 using D2L.Security.OAuth2.Principal;
 using D2L.Security.OAuth2.Validation.Request;
+using D2L.Services.Core.Activation;
 using D2L.Services.Core.Configuration;
 using Microsoft.Owin.Hosting;
 using Owin;
