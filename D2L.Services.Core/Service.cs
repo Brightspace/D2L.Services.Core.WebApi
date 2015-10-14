@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Dependencies;
@@ -65,6 +66,9 @@ namespace D2L.Services.Core {
 		}
 
 		void IService.Start() {
+
+			ConfigureHttps();
+
 			IService @this = this;
 
 			var options = new StartOptions();
@@ -76,6 +80,22 @@ namespace D2L.Services.Core {
 			options.Urls.Add( host );
 
 			m_disposeHandle = WebApp.Start( options, OwinStartup );
+		}
+
+		private static void ConfigureHttps() {
+			// Work around shitty defaults in .NET 4.5, but be careful to not enable
+			// things that might be "bad" in the future by narrowly looking for the
+			// .NET 4.5 default settings.
+
+			// This impacts *outgoing* requests from this service (e.g. HttpClient.)
+
+			const SecurityProtocolType NET_4_5_DEFAULT_SETTING =
+				SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls;
+
+			if( ServicePointManager.SecurityProtocol == NET_4_5_DEFAULT_SETTING ) {
+				ServicePointManager.SecurityProtocol |=
+					SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+			}
 		}
 
 		public void OwinStartup( IAppBuilder builder ) {
