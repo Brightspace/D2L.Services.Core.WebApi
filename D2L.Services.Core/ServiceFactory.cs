@@ -19,16 +19,16 @@ namespace D2L.Services.Core {
 			}
 
 			var name = bootstrapConfigViewer
-				.GetInstanceAsync( Constants.Configs.SERVICE_NAME )
+				.DangerouslyGetSystemDefaultAsync( Constants.Configs.SERVICE_NAME )
 				.SafeWait();
 
 			var serviceId = Guid.Parse(
 				bootstrapConfigViewer
-					.GetInstanceAsync( Constants.Configs.SERVICE_ID )
-					.SafeWait()
+					.DangerouslyGetSystemDefaultAsync( Constants.Configs.SERVICE_ID )
+					.SafeWait().Value
 			);
 
-			var descriptor = new ServiceDescriptor( serviceId, name );
+			var descriptor = new ServiceDescriptor( serviceId, name.Value );
 
 			return new Service(
 				descriptor,

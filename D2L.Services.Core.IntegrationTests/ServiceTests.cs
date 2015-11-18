@@ -6,7 +6,7 @@ using SimpleLogInterface;
 
 namespace D2L.Services.Core.IntegrationTests {
 	[TestFixture]
-    public class ServiceTests {
+	public class ServiceTests {
 
 		[Test]
 		public void Service_Start_Works() {
@@ -16,36 +16,59 @@ namespace D2L.Services.Core.IntegrationTests {
 			var bootstrapConfig = new Mock<IConfigViewer>( MockBehavior.Strict );
 
 			bootstrapConfig
-				.Setup( cv => cv.TryGetInstanceAsync( Constants.Configs.SERVICE_NAME ) )
-				.ReturnsAsync( EXPECTED_SERVICE_NAME );
+				.Setup( cv => cv.TryDangerouslyGetSystemDefaultAsync( Constants.Configs.SERVICE_NAME ) )
+				.ReturnsAsync( new ConfigValue(
+					name: Constants.Configs.SERVICE_NAME,
+					value: EXPECTED_SERVICE_NAME,
+					isDefault: true
+				 )
+			);
 
 			bootstrapConfig
-				.Setup( cv => cv.TryGetInstanceAsync( Constants.Configs.SERVICE_ID ) )
-				.ReturnsAsync( EXPECTED_SERVICE_ID );
+				.Setup( cv => cv.TryDangerouslyGetSystemDefaultAsync( Constants.Configs.SERVICE_ID ) )
+				.ReturnsAsync( new ConfigValue(
+					name: Constants.Configs.SERVICE_ID,
+					value: EXPECTED_SERVICE_ID,
+					isDefault: true
+				)
+			);
 
 			var configViewer = new Mock<IConfigViewer>( MockBehavior.Strict );
 
 			configViewer
-				.Setup( cv => cv.TryGetInstanceAsync( Constants.Configs.HOST ) )
-				.ReturnsAsync( "http://+:1234" ); // TODO: pick a port intelligently?
+				.Setup( cv => cv.TryDangerouslyGetSystemDefaultAsync( Constants.Configs.HOST ) )
+				.ReturnsAsync( new ConfigValue(
+					name: Constants.Configs.HOST,
+					value: "http://+:1234",
+					isDefault: true
+				)
+			); // TODO: pick a port intelligently?
 
+			// TODO: shouldn't be going default styles?
 			configViewer
-				.Setup( cv => cv.TryGetInstanceAsync( Constants.Configs.AUTH_ENDPOINT ) )
-				.ReturnsAsync( "http://localhost:1235" );
+				.Setup( cv => cv.TryDangerouslyGetSystemDefaultAsync( Constants.Configs.AUTH_ENDPOINT ) )
+				.ReturnsAsync( new ConfigValue(
+					name: Constants.Configs.AUTH_ENDPOINT,
+					value: "http://localhost:1235",
+					isDefault: true
+				)
+			);
 
-			using (var service = ServiceFactory.Create<DummyLoader>(
-				startup: config => {},
+			using( var service = ServiceFactory.Create<DummyLoader>(
+				startup: config => {
+				},
 				configViewer: configViewer.Object,
 				logProvider: NullLogProvider.Instance,
 				bootstrapConfigViewer: bootstrapConfig.Object
-			)) {
+			) ) {
 				service.Start();
 				Assert.Pass();
 			}
 		}
 
 		private class DummyLoader : IDependencyLoader {
-			void IDependencyLoader.Load(IDependencyRegistry registry) {}
+			void IDependencyLoader.Load( IDependencyRegistry registry ) {
+			}
 		}
-    }
+	}
 }

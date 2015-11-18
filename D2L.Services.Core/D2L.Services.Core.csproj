@@ -41,11 +41,13 @@
     <Reference Include="D2L.Services.Core.Activation">
       <HintPath>..\packages\D2L.Services.Core.Activation.3.0.0.0\lib\net45\D2L.Services.Core.Activation.dll</HintPath>
     </Reference>
-    <Reference Include="D2L.Services.Core.Configuration">
-      <HintPath>..\packages\D2L.Services.Core.Configuration.1.0.0.0\lib\net452\D2L.Services.Core.Configuration.dll</HintPath>
+    <Reference Include="D2L.Services.Core.Configuration, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\D2L.Services.Core.Configuration.2.0.0.0\lib\net451\D2L.Services.Core.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="D2L.Services.Core.Extensions">
-      <HintPath>..\packages\D2L.Services.Core.Extensions.1.0.0.0\lib\net452\D2L.Services.Core.Extensions.dll</HintPath>
+    <Reference Include="D2L.Services.Core.Extensions, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\D2L.Services.Core.Extensions.1.1.1.0\lib\net451\D2L.Services.Core.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Hangfire.Core">
       <HintPath>..\packages\Hangfire.Core.1.4.5\lib\net45\Hangfire.Core.dll</HintPath>

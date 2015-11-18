@@ -74,10 +74,10 @@ namespace D2L.Services.Core {
 			var options = new StartOptions();
 
 			var host = m_configViewer
-				.GetInstanceAsync( Constants.Configs.HOST )
+				.DangerouslyGetSystemDefaultAsync( Constants.Configs.HOST )
 				.SafeWait();
 
-			options.Urls.Add( host );
+			options.Urls.Add( host.Value );
 
 			m_disposeHandle = WebApp.Start( options, OwinStartup );
 		}
@@ -105,13 +105,14 @@ namespace D2L.Services.Core {
 
 			var authHandlerFactory = new AuthenticationMessageHandlerFactory();
 
+            // TODO: the auth stuff needs to take IConfigViewer instead so we can override the auth service
 			var authEndpoint = m_configViewer
-				.GetInstanceAsync( Constants.Configs.AUTH_ENDPOINT )
+				.DangerouslyGetSystemDefaultAsync( Constants.Configs.AUTH_ENDPOINT )
 				.SafeWait();
 
 			var authHandler = authHandlerFactory.Create(
 				httpConfiguration: config,
-				authenticationEndpoint: new Uri( authEndpoint ),
+				authenticationEndpoint: new Uri( authEndpoint.Value ),
 				logProvider: m_dependencyResolver.Get<ILogProvider>()
 			);
 
