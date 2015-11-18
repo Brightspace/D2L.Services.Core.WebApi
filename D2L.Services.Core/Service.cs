@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Dependencies;
 using D2L.Security.OAuth2.Principal;
@@ -12,7 +11,7 @@ using Owin;
 using SimpleLogInterface;
 
 namespace D2L.Services.Core {
-	public sealed class Service : IService {
+	internal sealed class Service : IService {
 		private readonly ServiceDescriptor m_serviceDescriptor;
 		private readonly IConfigViewer m_configViewer;
 		private readonly ILogProvider m_logProvider;

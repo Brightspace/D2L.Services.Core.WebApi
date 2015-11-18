@@ -13,7 +13,6 @@ namespace D2L.Services.Core {
 			ILogProvider logProvider,
 			IConfigViewer bootstrapConfigViewer = null
 		) {
-
 			if (bootstrapConfigViewer == null) {
 				bootstrapConfigViewer = new AppConfigConfigViewer();
 			}
