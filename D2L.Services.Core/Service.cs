@@ -11,8 +11,8 @@ using Owin;
 using SimpleLogInterface;
 
 namespace D2L.Services.Core {
-	internal sealed class Service : IService {
-		private readonly ServiceDescriptor m_serviceDescriptor;
+	public sealed class Service : IService {
+		private readonly ServiceDescriptor m_descriptor;
 		private readonly IConfigViewer m_configViewer;
 		private readonly ILogProvider m_logProvider;
 		private readonly IDependencyResolver m_dependencyResolver;
@@ -21,13 +21,13 @@ namespace D2L.Services.Core {
 		private IDisposable m_disposeHandle;
 
 		public Service(
-			ServiceDescriptor serviceDescriptor,
+			ServiceDescriptor descriptor,
 			IConfigViewer configViewer,
 			ILogProvider logProvider,
 			Action<HttpConfiguration> startup,
 			Type dependencyLoaderType
 		) {
-			m_serviceDescriptor = serviceDescriptor;
+			m_descriptor = descriptor;
 			m_configViewer = configViewer;
 			m_logProvider = logProvider;
 			m_startup = startup;
@@ -36,6 +36,28 @@ namespace D2L.Services.Core {
 				.CreateFrom( registry =>
 					SetupDependencyInjection( dependencyLoaderType, registry )
 				);
+		}
+
+		ServiceDescriptor IService.Descriptor {
+			get { return m_descriptor; }
+		}
+
+		void IService.Start() {
+
+			ConfigureHttps();
+
+			IService @this = this;
+
+			var options = new StartOptions();
+
+			// TODO: should this go through IConfigViewer? local only styles?
+			options.Urls.Add( "http://+:1234" );
+
+			m_disposeHandle = WebApp.Start( options, OwinStartup );
+		}
+
+		void IDisposable.Dispose() {
+			m_disposeHandle.SafeDispose();
 		}
 
 		private void SetupDependencyInjection(
@@ -54,31 +76,6 @@ namespace D2L.Services.Core {
 
 				method.Invoke( registry, null );
 			}
-		}
-
-		void IDisposable.Dispose() {
-			m_disposeHandle.SafeDispose();
-		}
-
-		ServiceDescriptor IService.Descriptor {
-			get { return m_serviceDescriptor; }
-		}
-
-		void IService.Start() {
-
-			ConfigureHttps();
-
-			IService @this = this;
-
-			var options = new StartOptions();
-
-			var host = m_configViewer
-				.DangerouslyGetSystemDefaultAsync( Constants.Configs.HOST )
-				.SafeWait();
-
-			options.Urls.Add( host.Value );
-
-			m_disposeHandle = WebApp.Start( options, OwinStartup );
 		}
 
 		private static void ConfigureHttps() {
