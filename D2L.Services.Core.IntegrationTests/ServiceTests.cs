@@ -1,4 +1,5 @@
-﻿using D2L.Services.Core.Activation;
+﻿using System;
+using D2L.Services.Core.Activation;
 using D2L.Services.Core.Configuration;
 using Moq;
 using NUnit.Framework;
@@ -6,46 +7,45 @@ using SimpleLogInterface;
 
 namespace D2L.Services.Core.IntegrationTests {
 	[TestFixture]
-    public class ServiceTests {
+	public class ServiceTests {
 
 		[Test]
 		public void Service_Start_Works() {
 			const string EXPECTED_SERVICE_NAME = "FakeIntegrationTestService";
-			const string EXPECTED_SERVICE_ID = "f0fe8353-c1b7-42d4-95d4-17b505df668b";
+			Guid EXPECTED_SERVICE_ID = Guid.NewGuid();
 
-			var bootstrapConfig = new Mock<IConfigViewer>( MockBehavior.Strict );
-
-			bootstrapConfig
-				.Setup( cv => cv.TryGetInstanceAsync( Constants.Configs.SERVICE_NAME ) )
-				.ReturnsAsync( EXPECTED_SERVICE_NAME );
-
-			bootstrapConfig
-				.Setup( cv => cv.TryGetInstanceAsync( Constants.Configs.SERVICE_ID ) )
-				.ReturnsAsync( EXPECTED_SERVICE_ID );
+			var descriptor = new ServiceDescriptor(
+				id: EXPECTED_SERVICE_ID,
+				name: EXPECTED_SERVICE_NAME
+			);
 
 			var configViewer = new Mock<IConfigViewer>( MockBehavior.Strict );
 
+			// TODO: shouldn't be going default styles?
 			configViewer
-				.Setup( cv => cv.TryGetInstanceAsync( Constants.Configs.HOST ) )
-				.ReturnsAsync( "http://+:1234" ); // TODO: pick a port intelligently?
+				.Setup( cv => cv.TryDangerouslyGetSystemDefaultAsync( Constants.Configs.AUTH_ENDPOINT ) )
+				.ReturnsAsync( new ConfigValue(
+					name: Constants.Configs.AUTH_ENDPOINT,
+					value: "http://localhost:1235",
+					isDefault: true
+				)
+			);
 
-			configViewer
-				.Setup( cv => cv.TryGetInstanceAsync( Constants.Configs.AUTH_ENDPOINT ) )
-				.ReturnsAsync( "http://localhost:1235" );
-
-			using (var service = ServiceFactory.Create<DummyLoader>(
-				startup: config => {},
+			using( IService service = new Service(
+				descriptor: descriptor,
 				configViewer: configViewer.Object,
 				logProvider: NullLogProvider.Instance,
-				bootstrapConfigViewer: bootstrapConfig.Object
-			)) {
+				startup: config => {},
+				dependencyLoaderType: typeof( DummyLoader )
+			) ) {
 				service.Start();
 				Assert.Pass();
 			}
 		}
 
 		private class DummyLoader : IDependencyLoader {
-			void IDependencyLoader.Load(IDependencyRegistry registry) {}
+			void IDependencyLoader.Load( IDependencyRegistry registry ) {
+			}
 		}
-    }
+	}
 }
