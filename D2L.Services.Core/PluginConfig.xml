@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<pluginConfig>
+	<!-- Valid scopes: Singleton, Instance -->
+	<plugin name="objectiveDataSource" scope="Singleton">
+		<!-- Example -->
+		<!-- <pluginImplementation assembly="D2L.ASN.Client" typeName="D2L.ASN.Client.AsnDataSourcePlugin" /> -->
+	</plugin>
+</pluginConfig>

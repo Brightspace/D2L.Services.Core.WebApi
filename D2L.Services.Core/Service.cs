@@ -12,6 +12,7 @@ using SimpleLogInterface;
 
 namespace D2L.Services.Core {
 	public sealed class Service : IService {
+		private readonly string m_url;
 		private readonly ServiceDescriptor m_descriptor;
 		private readonly IConfigViewer m_configViewer;
 		private readonly ILogProvider m_logProvider;
@@ -21,12 +22,14 @@ namespace D2L.Services.Core {
 		private IDisposable m_disposeHandle;
 
 		public Service(
+			string url,
 			ServiceDescriptor descriptor,
 			IConfigViewer configViewer,
 			ILogProvider logProvider,
 			Action<HttpConfiguration> startup,
 			Type dependencyLoaderType
 		) {
+			m_url = url;
 			m_descriptor = descriptor;
 			m_configViewer = configViewer;
 			m_logProvider = logProvider;
@@ -43,15 +46,13 @@ namespace D2L.Services.Core {
 		}
 
 		void IService.Start() {
-
 			ConfigureHttps();
 
 			IService @this = this;
 
 			var options = new StartOptions();
 
-			// TODO: should this go through IConfigViewer? local only styles?
-			options.Urls.Add( "http://+:1234" );
+			options.Urls.Add( m_url );
 
 			m_disposeHandle = WebApp.Start( options, OwinStartup );
 		}
@@ -103,12 +104,12 @@ namespace D2L.Services.Core {
 
             // TODO: the auth stuff needs to take IConfigViewer instead so we can override the auth service
 			var authEndpoint = m_configViewer
-				.DangerouslyGetSystemDefaultAsync( Constants.Configs.AUTH_ENDPOINT )
+				.GetGlobalAsync<Uri>( Constants.Configs.AUTH_ENDPOINT )
 				.SafeWait();
 
 			var authHandler = authHandlerFactory.Create(
 				httpConfiguration: config,
-				authenticationEndpoint: new Uri( authEndpoint.Value ),
+				authenticationEndpoint: authEndpoint.Value,
 				logProvider: m_dependencyResolver.Get<ILogProvider>()
 			);
 

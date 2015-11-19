@@ -23,15 +23,15 @@ namespace D2L.Services.Core.IntegrationTests {
 
 			// TODO: shouldn't be going default styles?
 			configViewer
-				.Setup( cv => cv.TryDangerouslyGetSystemDefaultAsync( Constants.Configs.AUTH_ENDPOINT ) )
-				.ReturnsAsync( new ConfigValue(
+				.Setup( cv => cv.GetGlobalAsync<Uri>( Constants.Configs.AUTH_ENDPOINT ) )
+				.ReturnsAsync( new ConfigValue<Uri>(
 					name: Constants.Configs.AUTH_ENDPOINT,
-					value: "http://localhost:1235",
-					isDefault: true
+					value: new Uri( "http://localhost:1235" )
 				)
 			);
 
 			using( IService service = new Service(
+				url: "http://+:1234", // TODO: do this smarter
 				descriptor: descriptor,
 				configViewer: configViewer.Object,
 				logProvider: NullLogProvider.Instance,
