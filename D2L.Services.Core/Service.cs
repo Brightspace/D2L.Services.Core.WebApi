@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Dependencies;
+using System.Web.Http.Filters;
+using D2L.Security.OAuth2.Authentication;
+using D2L.Security.OAuth2.Authorization;
 using D2L.Security.OAuth2.Principal;
+using D2L.Security.OAuth2.Validation.AccessTokens;
 using D2L.Security.OAuth2.Validation.Request;
 using D2L.Services.Core.Activation;
+using D2L.Services.Core.Auth;
 using D2L.Services.Core.Configuration;
 using Microsoft.Owin.Hosting;
+using Microsoft.Practices.Unity;
 using Owin;
 using SimpleLogInterface;
 
@@ -36,9 +44,12 @@ namespace D2L.Services.Core {
 			m_startup = startup;
 
 			m_dependencyResolver = DependencyResolverFactory
-				.CreateFrom( registry =>
-					SetupDependencyInjection( dependencyLoaderType, registry )
-				);
+				.CreateFrom( new CoreDependencyLoader(
+					m_configViewer,
+					m_logProvider,
+					dependencyLoaderType
+				)
+			);
 		}
 
 		ServiceDescriptor IService.Descriptor {
@@ -59,24 +70,6 @@ namespace D2L.Services.Core {
 
 		void IDisposable.Dispose() {
 			m_disposeHandle.SafeDispose();
-		}
-
-		private void SetupDependencyInjection(
-			Type dependencyLoaderType,
-			IDependencyRegistry registry
-		) {
-			registry.RegisterFactory<ID2LPrincipal, D2LPrincipalFactory>( ObjectScope.WebRequest );
-
-			registry.RegisterInstance<ILogProvider>( m_logProvider );
-			registry.RegisterInstance<IConfigViewer>( m_configViewer );
-
-			if( dependencyLoaderType != null ) {
-				var method = typeof( IDependencyRegistry )
-					.GetMethod( "LoadFrom" )
-					.MakeGenericMethod( dependencyLoaderType );
-
-				method.Invoke( registry, null );
-			}
 		}
 
 		private static void ConfigureHttps() {
@@ -100,21 +93,10 @@ namespace D2L.Services.Core {
 				DependencyResolver = m_dependencyResolver
 			};
 
-			var authHandlerFactory = new AuthenticationMessageHandlerFactory();
+			var authConfigurator = m_dependencyResolver
+				.Get<IWebApiAuthConfigurator>();
 
-            // TODO: the auth stuff needs to take IConfigViewer instead so we can override the auth service
-			var authEndpoint = m_configViewer
-				.GetGlobalAsync<Uri>( Constants.Configs.AUTH_ENDPOINT )
-				.SafeWait();
-
-			var authHandler = authHandlerFactory.Create(
-				httpConfiguration: config,
-				authenticationEndpoint: authEndpoint.Value,
-				logProvider: m_dependencyResolver.Get<ILogProvider>()
-			);
-
-			// TODO: use authHandler... need to do this in a way that
-			// routes can opt out of it... maybe we pass it into m_startup?
+			authConfigurator.Configure( config );
 
 			m_startup( config );
 
