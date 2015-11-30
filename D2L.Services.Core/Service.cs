@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Dependencies;
 using System.Web.Http.Filters;
 using D2L.Security.OAuth2.Authentication;
@@ -82,6 +83,8 @@ namespace D2L.Services.Core {
 
 			authConfigurator.Configure( config );
 
+			EnableCors( config );
+
 			m_startup( config );
 
 			config.EnsureInitialized();
@@ -105,7 +108,14 @@ namespace D2L.Services.Core {
 			}
 		}
 
+		private static void EnableCors( HttpConfiguration config ) {
+			var settings = new EnableCorsAttribute(
+				origins: "*",
+				headers: "*",
+				methods: "*"
+			);
 
+			config.EnableCors( settings );
 		}
 	}
 }
