@@ -23,10 +23,10 @@ namespace D2L.Services.Core.Auth {
 		}
 
 		void IWebApiAuthConfigurator.Configure( HttpConfiguration config ) {
+			config.Filters.Add( m_authenticationFilter );
+
 			// This forces [RequireScope(...)] and [AllowFrom(...)] attribute usage
 			config.Filters.Add( new DefaultAuthorizationAttribute() );
-
-			config.Filters.Add( m_authenticationFilter );
 		}
 	}
 }
