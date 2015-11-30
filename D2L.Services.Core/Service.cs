@@ -58,8 +58,6 @@ namespace D2L.Services.Core {
 		}
 
 		void IService.Start() {
-			ConfigureHttps();
-
 			IService @this = this;
 
 			var options = new StartOptions();
@@ -74,6 +72,8 @@ namespace D2L.Services.Core {
 		}
 
 		public void OwinStartup( IAppBuilder builder ) {
+			ConfigureHttps();
+
 			var config = new HttpConfiguration {
 				DependencyResolver = m_dependencyResolver
 			};
