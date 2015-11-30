@@ -72,6 +72,23 @@ namespace D2L.Services.Core {
 			m_disposeHandle.SafeDispose();
 		}
 
+		public void OwinStartup( IAppBuilder builder ) {
+			var config = new HttpConfiguration {
+				DependencyResolver = m_dependencyResolver
+			};
+
+			var authConfigurator = m_dependencyResolver
+				.Get<IWebApiAuthConfigurator>();
+
+			authConfigurator.Configure( config );
+
+			m_startup( config );
+
+			config.EnsureInitialized();
+
+			builder.UseWebApi( config );
+		}
+
 		private static void ConfigureHttps() {
 			// Work around shitty defaults in .NET 4.5, but be careful to not enable
 			// things that might be "bad" in the future by narrowly looking for the
@@ -88,21 +105,7 @@ namespace D2L.Services.Core {
 			}
 		}
 
-		public void OwinStartup( IAppBuilder builder ) {
-			var config = new HttpConfiguration {
-				DependencyResolver = m_dependencyResolver
-			};
 
-			var authConfigurator = m_dependencyResolver
-				.Get<IWebApiAuthConfigurator>();
-
-			authConfigurator.Configure( config );
-
-			m_startup( config );
-
-			config.EnsureInitialized();
-
-			builder.UseWebApi( config );
 		}
 	}
 }
