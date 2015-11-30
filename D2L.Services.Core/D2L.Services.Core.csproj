@@ -110,6 +110,7 @@
     <Compile Include="CoreDependencyLoader.cs" />
     <Compile Include="Extensions\System.Net.Http.HttpRequestMessage.Extensions.cs" />
     <Compile Include="Extensions\System.Web.Http.Dependencies.IDependencyScope.Extensions.cs" />
+    <Compile Include="Extensions\System.Web.Http.HttpConfiguration.Extensions.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service.cs" />

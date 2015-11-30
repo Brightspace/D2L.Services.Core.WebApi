@@ -83,8 +83,6 @@ namespace D2L.Services.Core {
 
 			authConfigurator.Configure( config );
 
-			EnableCors( config );
-
 			m_startup( config );
 
 			config.EnsureInitialized();
@@ -106,16 +104,6 @@ namespace D2L.Services.Core {
 				ServicePointManager.SecurityProtocol |=
 					SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
 			}
-		}
-
-		private static void EnableCors( HttpConfiguration config ) {
-			var settings = new EnableCorsAttribute(
-				origins: "*",
-				headers: "*",
-				methods: "*"
-			);
-
-			config.EnableCors( settings );
 		}
 	}
 }
