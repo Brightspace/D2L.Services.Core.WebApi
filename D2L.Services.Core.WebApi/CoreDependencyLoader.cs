@@ -3,7 +3,7 @@ using D2L.Services.Core.Activation;
 using D2L.Services.Core.Configuration;
 using SimpleLogInterface;
 
-namespace D2L.Services.Core {
+namespace D2L.Services.Core.WebApi {
 	internal sealed class CoreDependencyLoader : IDependencyLoader {
 		private readonly IConfigViewer m_configViewer;
 		private readonly ILogProvider m_logProvider;

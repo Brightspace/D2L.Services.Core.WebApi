@@ -5,7 +5,7 @@ using D2L.Security.OAuth2.Validation.Request;
 using D2L.Services.Core.Activation;
 using D2L.Services.Core.Configuration;
 
-namespace D2L.Services.Core.Auth {
+namespace D2L.Services.Core.WebApi.Auth {
 	/// <summary>
 	/// This class is "temp" because we shouldn't need a factory once we refactor RequestAuthenticator and friends
 	/// </summary>

@@ -12,14 +12,14 @@ using D2L.Security.OAuth2.Principal;
 using D2L.Security.OAuth2.Validation.AccessTokens;
 using D2L.Security.OAuth2.Validation.Request;
 using D2L.Services.Core.Activation;
-using D2L.Services.Core.Auth;
 using D2L.Services.Core.Configuration;
+using D2L.Services.Core.WebApi.Auth;
 using Microsoft.Owin.Hosting;
 using Microsoft.Practices.Unity;
 using Owin;
 using SimpleLogInterface;
 
-namespace D2L.Services.Core {
+namespace D2L.Services.Core.WebApi {
 	public sealed class Service : IService {
 		private readonly string m_url;
 		private readonly ServiceDescriptor m_descriptor;

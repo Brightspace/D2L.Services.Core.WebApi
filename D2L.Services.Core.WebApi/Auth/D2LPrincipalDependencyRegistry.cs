@@ -2,7 +2,8 @@
 using D2L.Security.OAuth2.Authentication;
 using D2L.Security.OAuth2.Principal;
 using Microsoft.Practices.Unity;
-namespace D2L.Services.Core.Auth {
+
+namespace D2L.Services.Core.WebApi.Auth {
 	internal sealed class D2LPrincipalDependencyRegistry : ID2LPrincipalDependencyRegistry {
 		void ID2LPrincipalDependencyRegistry.Register(
 			HttpAuthenticationContext context,

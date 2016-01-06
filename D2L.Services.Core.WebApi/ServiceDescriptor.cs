@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace D2L.Services.Core {
+namespace D2L.Services.Core.WebApi {
 	public sealed class ServiceDescriptor {
 		private readonly Guid m_id;
 		private readonly string m_name;

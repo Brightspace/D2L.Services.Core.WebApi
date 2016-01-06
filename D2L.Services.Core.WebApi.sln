@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D2L.Services.Core", "D2L.Services.Core\D2L.Services.Core.csproj", "{73F8D575-E3C1-4043-8235-E323DCBC2384}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D2L.Services.Core.WebApi", "D2L.Services.Core.WebApi\D2L.Services.Core.WebApi.csproj", "{73F8D575-E3C1-4043-8235-E323DCBC2384}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8B96B266-6421-45C5-A5B0-A992DA7B5F61}"
 EndProject
@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F27A4C
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D2L.Services.Core.IntegrationTests", "D2L.Services.Core.IntegrationTests\D2L.Services.Core.IntegrationTests.csproj", "{9D4541A7-4F64-4610-987C-D32C44AFEAF6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D2L.Services.Core.WebApi.IntegrationTests", "D2L.Services.Core.WebApi.IntegrationTests\D2L.Services.Core.WebApi.IntegrationTests.csproj", "{9D4541A7-4F64-4610-987C-D32C44AFEAF6}"
 	ProjectSection(ProjectDependencies) = postProject
 		{73F8D575-E3C1-4043-8235-E323DCBC2384} = {73F8D575-E3C1-4043-8235-E323DCBC2384}
 	EndProjectSection

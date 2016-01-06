@@ -5,7 +5,7 @@ using Moq;
 using NUnit.Framework;
 using SimpleLogInterface;
 
-namespace D2L.Services.Core.IntegrationTests {
+namespace D2L.Services.Core.WebApi {
 	[TestFixture]
 	public class ServiceTests {
 

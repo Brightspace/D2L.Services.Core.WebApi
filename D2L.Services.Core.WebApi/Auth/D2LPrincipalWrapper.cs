@@ -5,7 +5,7 @@ using D2L.Security.OAuth2.Scopes;
 using D2L.Security.OAuth2.Validation.AccessTokens;
 using Microsoft.Practices.Unity;
 
-namespace D2L.Services.Core.Auth {
+namespace D2L.Services.Core.WebApi.Auth {
 	internal sealed class D2LPrincipalWrapper : ID2LPrincipal {
 		// Excessive, but will make it less likely to collide with anything/anyone
 		// getting funny ideas about grabbing this from outside the assembly (not

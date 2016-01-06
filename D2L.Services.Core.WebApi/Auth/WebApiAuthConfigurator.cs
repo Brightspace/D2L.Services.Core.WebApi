@@ -12,7 +12,7 @@ using D2L.Services.Core.Configuration;
 using Microsoft.Practices.Unity;
 using SimpleLogInterface;
 
-namespace D2L.Services.Core.Auth {
+namespace D2L.Services.Core.WebApi.Auth {
 	internal sealed class WebApiAuthConfigurator : IWebApiAuthConfigurator {
 		private readonly OAuth2AuthenticationFilter m_authenticationFilter;
 

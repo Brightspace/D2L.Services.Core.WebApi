@@ -3,7 +3,7 @@ using D2L.Security.OAuth2.Principal;
 using D2L.Security.OAuth2.Validation.Request;
 using D2L.Services.Core.Activation;
 
-namespace D2L.Services.Core.Auth {
+namespace D2L.Services.Core.WebApi.Auth {
 	internal sealed class DependencyLoader : IDependencyLoader {
 		void IDependencyLoader.Load( IDependencyRegistry registry ) {
 			registry.Register<ID2LPrincipal, D2LPrincipalWrapper>( ObjectScope.WebRequest );
