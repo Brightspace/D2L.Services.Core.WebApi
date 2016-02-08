@@ -1,15 +1,14 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("D2L.Services.Core.IntegrationTests")]
+[assembly: AssemblyTitle("D2L.Services.Core.WebApi.IntegrationTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Desire2Learn")]
-[assembly: AssemblyProduct("D2L.Services.Core.IntegrationTests")]
+[assembly: AssemblyProduct("D2L.Services.Core.WebApi.IntegrationTests")]
 [assembly: AssemblyCopyright("Copyright © Desire2Learn 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

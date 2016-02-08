@@ -1,21 +1,11 @@
 ﻿using System;
 using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Cors;
 using System.Web.Http.Dependencies;
-using System.Web.Http.Filters;
-using D2L.Security.OAuth2.Authentication;
-using D2L.Security.OAuth2.Authorization;
-using D2L.Security.OAuth2.Principal;
-using D2L.Security.OAuth2.Validation.AccessTokens;
-using D2L.Security.OAuth2.Validation.Request;
 using D2L.Services.Core.Activation;
 using D2L.Services.Core.Configuration;
 using D2L.Services.Core.WebApi.Auth;
 using Microsoft.Owin.Hosting;
-using Microsoft.Practices.Unity;
 using Owin;
 using SimpleLogInterface;
 

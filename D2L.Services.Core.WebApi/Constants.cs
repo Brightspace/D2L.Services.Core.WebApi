@@ -1,4 +1,4 @@
-﻿namespace D2L.Services.Core {
+﻿namespace D2L.Services.Core.WebApi {
 	public static class Constants {
 		public static class Configs {
 			// TODO: belongs in oauth2 library
