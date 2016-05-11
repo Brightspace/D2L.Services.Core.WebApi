@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("D2L.Services.Core.WebApi")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Helper library for creating WebAPI services")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Desire2Learn")]
-[assembly: AssemblyProduct("D2L.Services.Core")]
-[assembly: AssemblyCopyright("Copyright © Desire2Learn 2015")]
+[assembly: AssemblyProduct("D2L.Services.Core.WebApi")]
+[assembly: AssemblyCopyright("Copyright © D2L 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,3 +33,4 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("0.0.14.0")]
 [assembly: AssemblyFileVersion("0.0.14.0")]
+[assembly: AssemblyInformationalVersion( "0.0.14.0" )]
