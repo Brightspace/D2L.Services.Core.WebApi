@@ -24,6 +24,10 @@ namespace D2L.Services.Core.WebApi.Auth {
 			get { return m_principal.Value.AccessToken; }
 		}
 
+		long ID2LPrincipal.ActualUserId {
+			get { return m_principal.Value.ActualUserId; }
+		}
+
 		IEnumerable<Scope> ID2LPrincipal.Scopes {
 			get { return m_principal.Value.Scopes; }
 		}
@@ -36,7 +40,7 @@ namespace D2L.Services.Core.WebApi.Auth {
 			get { return m_principal.Value.Type; }
 		}
 
-		string ID2LPrincipal.UserId {
+		long ID2LPrincipal.UserId {
 			get { return m_principal.Value.UserId; }
 		}
 
