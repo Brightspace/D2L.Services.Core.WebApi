@@ -33,13 +33,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="D2L.Security.OAuth2, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\D2L.Security.OAuth2.4.4.0.0\lib\net451\D2L.Security.OAuth2.dll</HintPath>
+    <Reference Include="D2L.Security.OAuth2, Version=5.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\D2L.Security.OAuth2.5.0.3.0\lib\net451\D2L.Security.OAuth2.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="D2L.Security.OAuth2.WebApi, Version=3.2.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\D2L.Security.OAuth2.WebApi.3.2.3.0\lib\net451\D2L.Security.OAuth2.WebApi.dll</HintPath>
+    <Reference Include="D2L.Security.OAuth2.WebApi, Version=5.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\D2L.Security.OAuth2.WebApi.5.0.3.0\lib\net451\D2L.Security.OAuth2.WebApi.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="D2L.Services.Core.Activation, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -48,6 +48,10 @@
     <Reference Include="D2L.Services.Core.Configuration, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\D2L.Services.Core.Configuration.3.0.0.0\lib\net451\D2L.Services.Core.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="D2L.Services.Core.Exceptions, Version=1.0.0.27289, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\D2L.Services.Core.Exceptions.1.0.0.27289\lib\net451\D2L.Services.Core.Exceptions.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="D2L.Services.Core.Extensions, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
