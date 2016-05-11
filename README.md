@@ -1,9 +1,9 @@
 # D2L.Services.Core.WebApi
 
-Helper library for creating a WebAPI service
-
 [![Build status](https://ci.appveyor.com/api/projects/status/noy1jrgylvfpko04/branch/master?svg=true)](https://ci.appveyor.com/project/Brightspace/d2l-services-core-webapi/branch/master)
 [![NuGet](https://img.shields.io/nuget/v/D2L.Services.Core.WebApi.svg?maxAge=7200)](https://www.nuget.org/packages/D2L.Security.OAuth2/)
+
+Helper library for creating WebAPI services
 
 ## Contributing
 
