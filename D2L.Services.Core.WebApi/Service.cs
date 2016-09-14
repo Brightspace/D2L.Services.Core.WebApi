@@ -5,6 +5,7 @@ using System.Web.Http.Dependencies;
 using D2L.Services.Core.Activation;
 using D2L.Services.Core.Configuration;
 using D2L.Services.Core.WebApi.Auth;
+using D2L.Services.Core.WebApi.TestUtils;
 using Microsoft.Owin.Hosting;
 using Owin;
 using SimpleLogInterface;
@@ -26,7 +27,8 @@ namespace D2L.Services.Core.WebApi {
 			IConfigViewer configViewer,
 			ILogProvider logProvider,
 			Action<HttpConfiguration> startup,
-			Type dependencyLoaderType
+			Type dependencyLoaderType,
+			TestDependencyRegistry testDependencyRegistry = null
 		) {
 			m_url = url;
 			m_descriptor = descriptor;
@@ -41,6 +43,13 @@ namespace D2L.Services.Core.WebApi {
 					dependencyLoaderType
 				)
 			);
+			
+			if( testDependencyRegistry != null ) {
+				m_dependencyResolver = new TestDependencyResolver(
+					testDependencyRegistry,
+					m_dependencyResolver
+				);
+			}
 		}
 
 		ServiceDescriptor IService.Descriptor {
