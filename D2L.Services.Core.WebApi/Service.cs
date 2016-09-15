@@ -27,8 +27,7 @@ namespace D2L.Services.Core.WebApi {
 			IConfigViewer configViewer,
 			ILogProvider logProvider,
 			Action<HttpConfiguration> startup,
-			Type dependencyLoaderType,
-			TestDependencyRegistry testDependencyRegistry = null
+			Type dependencyLoaderType
 		) {
 			m_url = url;
 			m_descriptor = descriptor;
@@ -43,7 +42,24 @@ namespace D2L.Services.Core.WebApi {
 					dependencyLoaderType
 				)
 			);
-			
+		}
+		
+		public Service(
+			string url,
+			ServiceDescriptor descriptor,
+			IConfigViewer configViewer,
+			ILogProvider logProvider,
+			Action<HttpConfiguration> startup,
+			Type dependencyLoaderType,
+			TestDependencyRegistry testDependencyRegistry
+		) : this(
+			url,
+			descriptor,
+			configViewer,
+			logProvider,
+			startup,
+			dependencyLoaderType
+		) {
 			if( testDependencyRegistry != null ) {
 				m_dependencyResolver = new TestDependencyResolver(
 					testDependencyRegistry,
